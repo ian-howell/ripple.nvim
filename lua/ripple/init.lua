@@ -3,19 +3,23 @@ local M = {}
 M.setup = function(opts)
 
   local defaults = {
-    expand_right = "<C-right>",
-    expand_left = "<C-left>",
-    expand_up = "<C-up>",
-    expand_down = "<C-down>",
+    expand_right = { "<C-right>" },
+    expand_left = { "<C-left>" },
+    expand_up = { "<C-up>" },
+    expand_down = { "<C-down>" },
   }
 
   local keys = {}
   for key, default_key in pairs(defaults) do
     if opts and opts.keys then
       if opts.keys[key] then
-        vim.keymap.set("n", opts.keys[key], M[key])
+        if type(opts.keys[key]) == "string" then
+          vim.keymap.set("n", opts.keys[key], M[key])
+        elseif type(opts.keys[key]) == "table" then
+          vim.keymap.set("n", opts.keys[key][1], M[key])
+        end
       elseif opts.keys[key] == nil then
-        vim.keymap.set("n", default_key, M[key])
+        vim.keymap.set("n", default_key[1], M[key])
       end
     end
   end
