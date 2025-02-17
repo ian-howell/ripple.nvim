@@ -9,18 +9,15 @@ M.setup = function(opts)
     expand_down = { "<C-down>", mode = {"n", "v"}, desc = "expand down" },
   }
 
-  local keys = {}
-  for key, default_key in pairs(defaults) do
-    if opts and opts.keys then
-      if opts.keys[key] then
-        if type(opts.keys[key]) == "string" then
-          vim.keymap.set("n", opts.keys[key], M[key])
-        elseif type(opts.keys[key]) == "table" then
-          vim.keymap.set("n", opts.keys[key][1], M[key])
-        end
-      elseif opts.keys[key] == nil then
-        vim.keymap.set(default_key.mode, default_key[1], M[key], { desc = default_key.desc })
+  local keys = vim.tbl_deep_extend("force", defaults, (opts and opts.keys) or {})
+  for func_name, args in pairs(keys) do
+    if keys[func_name] then
+      if type(args) == "string" then
+        args = vim.tbl_deep_extend("force", defaults[func_name], { args })
+      elseif type(args) == "table" then
+        args = vim.tbl_deep_extend("force", defaults[func_name], args)
       end
+      vim.keymap.set(args.mode, args[1], M[func_name], { desc = args.desc })
     end
   end
 
