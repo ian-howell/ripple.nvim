@@ -3,10 +3,10 @@ local M = {}
 M.setup = function(opts)
 
   local defaults = {
-    expand_right = { "<C-right>" },
-    expand_left = { "<C-left>" },
-    expand_up = { "<C-up>" },
-    expand_down = { "<C-down>" },
+    expand_right = { "<C-right>", mode = {"n", "v"}, desc = "expand right" },
+    expand_left = { "<C-left>", mode = {"n", "v"}, desc = "expand left" },
+    expand_up = { "<C-up>", mode = {"n", "v"}, desc = "expand up" },
+    expand_down = { "<C-down>", mode = {"n", "v"}, desc = "expand down" },
   }
 
   local keys = {}
@@ -19,7 +19,7 @@ M.setup = function(opts)
           vim.keymap.set("n", opts.keys[key][1], M[key])
         end
       elseif opts.keys[key] == nil then
-        vim.keymap.set("n", default_key[1], M[key])
+        vim.keymap.set(default_key.mode, default_key[1], M[key], { desc = default_key.desc })
       end
     end
   end
