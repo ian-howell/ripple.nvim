@@ -29,11 +29,11 @@ end
 -- pretty annoying, so the following implements a more consistent behavior by expanding the window in the
 -- direction of the specified arrow key.
 
-function M._too_short(window_number)
+local function too_short(window_number)
 	return vim.api.nvim_win_get_height(vim.fn.win_getid(window_number)) <= 2
 end
 
-function M._too_narrow(window_number)
+local function too_narrow(window_number)
 	return vim.api.nvim_win_get_width(vim.fn.win_getid(window_number)) <= 2
 end
 
@@ -48,7 +48,7 @@ function M.expand_up(window_number, depth)
 		return false
 	end
 	-- If the window above the current window is too small, expand it first
-	if M._too_short(above_win_number) then
+	if too_short(above_win_number) then
 		if not M.expand_up(above_win_number, depth + 1) then
 			-- The window above can't be expanded, so the current window can't be expanded either
 			return false
@@ -69,7 +69,7 @@ function M.expand_down(window_number, depth)
 		return false
 	end
 	-- If the window below the current window is too small, expand it first
-	if M._too_short(below_win_number) then
+	if too_short(below_win_number) then
 		if not M.expand_down(below_win_number, depth + 1) then
 			-- The window below can't be expanded, so the current window can't be expanded either
 			return false
@@ -90,7 +90,7 @@ function M.expand_left(window_number, depth)
 		return false
 	end
 	-- If the window to the left of the current window is too narrow, expand it first
-	if M._too_narrow(left_win_number) then
+	if too_narrow(left_win_number) then
 		if not M.expand_left(left_win_number, depth + 1) then
 			-- The window to the left can't be expanded, so the current window can't be expanded either
 			return false
@@ -111,7 +111,7 @@ function M.expand_right(window_number, depth)
 		return false
 	end
 	-- If the window to the right of the current window is too narrow, expand it first
-	if M._too_narrow(right_win_number) then
+	if too_narrow(right_win_number) then
 		if not M.expand_right(right_win_number, depth + 1) then
 			-- The window to the right can't be expanded, so the current window can't be expanded either
 			return false
