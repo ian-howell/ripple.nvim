@@ -1,13 +1,27 @@
 local M = {}
 
 M.setup = function(opts)
-	M._opts = opts
-	if M._opts.keys then
-		for _, key in ipairs(M._opts.keys) do
-			-- TODO: Make this available in visual mode
-			vim.keymap.set("n", key[1], M["_" .. key[2]])
-		end
-	end
+
+  local defaults = {
+    expand_right = "<C-right>",
+    expand_left = "<C-left>",
+    expand_up = "<C-up>",
+    expand_down = "<C-down>",
+  }
+
+  local keys = {}
+  for key, default_key in pairs(defaults) do
+    if opts and opts.keys then
+      if opts.keys[key] then
+        local func_name = "_" .. key
+        vim.keymap.set("n", opts.keys[key], M[func_name])
+      elseif opts.keys[key] == nil then
+        local func_name = "_" .. key
+        vim.keymap.set("n", default_key, M[func_name])
+      end
+    end
+  end
+
 end
 
 -- Window resizing
