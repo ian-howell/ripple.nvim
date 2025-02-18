@@ -1,26 +1,24 @@
 local M = {}
 
 M.setup = function(opts)
+	local defaults = {
+		expand_right = { "<C-right>", mode = { "n", "v" }, desc = "expand right" },
+		expand_left = { "<C-left>", mode = { "n", "v" }, desc = "expand left" },
+		expand_up = { "<C-up>", mode = { "n", "v" }, desc = "expand up" },
+		expand_down = { "<C-down>", mode = { "n", "v" }, desc = "expand down" },
+	}
 
-  local defaults = {
-    expand_right = { "<C-right>", mode = {"n", "v"}, desc = "expand right" },
-    expand_left = { "<C-left>", mode = {"n", "v"}, desc = "expand left" },
-    expand_up = { "<C-up>", mode = {"n", "v"}, desc = "expand up" },
-    expand_down = { "<C-down>", mode = {"n", "v"}, desc = "expand down" },
-  }
-
-  local keys = vim.tbl_deep_extend("force", defaults, (opts and opts.keys) or {})
-  for func_name, args in pairs(keys) do
-    if keys[func_name] then
-      if type(args) == "string" then
-        args = vim.tbl_deep_extend("force", defaults[func_name], { args })
-      elseif type(args) == "table" then
-        args = vim.tbl_deep_extend("force", defaults[func_name], args)
-      end
-      vim.keymap.set(args.mode, args[1], M[func_name], { desc = args.desc })
-    end
-  end
-
+	local keys = vim.tbl_deep_extend("force", defaults, (opts and opts.keys) or {})
+	for func_name, args in pairs(keys) do
+		if keys[func_name] then
+			if type(args) == "string" then
+				args = vim.tbl_deep_extend("force", defaults[func_name], { args })
+			elseif type(args) == "table" then
+				args = vim.tbl_deep_extend("force", defaults[func_name], args)
+			end
+			vim.keymap.set(args.mode, args[1], M[func_name], { desc = args.desc })
+		end
+	end
 end
 
 -- Window resizing
@@ -123,5 +121,3 @@ function M.expand_right(window_number, depth)
 end
 
 return M
-
--- vim: ts=2 sw=2 et
