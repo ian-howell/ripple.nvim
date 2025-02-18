@@ -29,11 +29,13 @@ end
 -- direction of the specified arrow key.
 
 local function too_short(window_number)
-	return vim.api.nvim_win_get_height(vim.fn.win_getid(window_number)) <= 2
+	local limit = math.max(vim.opt.winminheight:get(), 2)
+	return vim.api.nvim_win_get_height(vim.fn.win_getid(window_number)) <= limit
 end
 
 local function too_narrow(window_number)
-	return vim.api.nvim_win_get_width(vim.fn.win_getid(window_number)) <= 2
+	local limit = math.max(vim.opt.winminwidth:get(), 2)
+	return vim.api.nvim_win_get_width(vim.fn.win_getid(window_number)) <= limit
 end
 
 -- expand_up expands the window upwards by one line.
