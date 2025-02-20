@@ -1,6 +1,6 @@
-# ripple.nvim
+                                 # ripple.nvim
 
-Intuitive window resizing.
+                           Intuitive window resizing.
 
 ## What does it do?
 
