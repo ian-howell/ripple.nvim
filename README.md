@@ -1,6 +1,6 @@
-                                 # ripple.nvim
+<h1 style="text-align: center;">ripple.nvim</h1>
 
-                           Intuitive window resizing.
+<p style="text-align: center;">Intuitive window resizing.</p>
 
 ## What does it do?
 
