@@ -1,6 +1,6 @@
-<h1 style="text-align: center;">ripple.nvim</h1>
+<h1 align="center">ripple.nvim</h1>
 
-<p style="text-align: center;">Intuitive window resizing.</p>
+<p align="center">Intuitive window resizing.</p>
 
 ## What does it do?
 
