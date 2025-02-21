@@ -4,12 +4,12 @@
 
 ## What does it do?
 
-By default, Neovim provides various methods to "resize" a window (e.g.
-`:resize`, `<C-w>+`, etc...). For example, suppose you have 3 stacked window,
-and you want to increase the size of the middle window. Using the default
-`<C-w>+` will accomplish this by pushing the bottom boundary down, increasing
-the size of the middle window and decreasing the size of the bottom window. For
-most cases, this is sufficient.
+By default, Neovim provides various methods to "resize" a window (`:resize`,
+`<C-w>+`, etc...). For example, suppose you have 3 stacked window, and you want
+to increase the size of the middle window. Using the default `<C-w>+` will
+accomplish this by pushing the bottom boundary down, increasing the size of the
+middle window and decreasing the size of the bottom window. For most cases, this
+is sufficient.
 
 But suppose you wanted to go the other direction, and push the top boundary
 *up*, expanding the middle window into the space the top window currently occupies.
@@ -44,7 +44,7 @@ require('ripple').setup({
     expand_up = { "<C-up>", mode = { "n", "v" }, desc = "expand up" },
     expand_down = { "<C-down>", mode = { "n", "v" }, desc = "expand down" },
 
-    -- This changes the default mappings, but keeps the default  mode and desc.
+    -- This changes the default mappings, but keeps the default mode and desc.
     expand_up = "<up>",
     expand_down = "<down>",
     expand_right = "<right>",
