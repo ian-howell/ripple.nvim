@@ -70,3 +70,22 @@ return {
   opts = {},
 }
 ```
+
+## Similar Solutions
+
+If you do not want to use a plugin, you can come very close to simulating Ripple
+with the following mappings:
+
+```lua
+vim.keymap("n", "<C-Up>", "<C-w>+", { desc = "Increase window height" })
+vim.keymap("n", "<C-Down>", "<C-w>-", { desc = "Decrease window height" })
+vim.keymap("n", "<C-Left>", "<C-w><", { desc = "Decrease window width" })
+vim.keymap("n", "<C-Right>", "<C-w>>", { desc = "Increase window width" })
+```
+
+Note that these mappings have the same pitfalls mentioned above.
+
+### Similar Plugins
+
+* <https://github.com/simeji/winresizer>
+* <https://github.com/sedm0784/vim-resize-mode>
