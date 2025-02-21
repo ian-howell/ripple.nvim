@@ -27,7 +27,7 @@ the following mappings:
 * `<C-left><left>`: Expand the current window left
 * `<C-right><right>`: Expand the current window right
 
-![demo](media/ripple-demo.mp4)
+![demo](media/ripple-demo.gif)
 
 ## Installation
 
