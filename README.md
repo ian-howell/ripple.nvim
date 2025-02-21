@@ -22,10 +22,10 @@ Rather than thinking about changing the size of a window, Ripple allows you to
 simply "expand" that window in the desired direction. By default, Ripple provides
 the following mappings:
 
-* `<C-up><up>`: Expand the current window up
-* `<C-down><down>`: Expand the current window down
-* `<C-left><left>`: Expand the current window left
-* `<C-right><right>`: Expand the current window right
+* `<C-up>`: Expand the current window up
+* `<C-down>`: Expand the current window down
+* `<C-left>`: Expand the current window left
+* `<C-right>`: Expand the current window right
 
 ![demo](media/ripple-demo.gif)
 
