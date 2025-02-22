@@ -2,6 +2,8 @@ local M = {}
 
 M.setup = function(opts)
 	local default = {
+		vertical_step_size = 1,
+		horizontal_step_size = 1,
 		keys = {
 			expand_right = { "<C-right>", mode = { "n", "v" }, desc = "expand right" },
 			expand_left = { "<C-left>", mode = { "n", "v" }, desc = "expand left" },
@@ -21,6 +23,9 @@ M.setup = function(opts)
 			vim.keymap.set(args.mode, args[1], M[func_name], { desc = args.desc })
 		end
 	end
+
+	M.vertical_step_size = opts.vertical_step_size or default.vertical_step_size
+	M.horizontal_step_size = opts.horizontal_step_size or default.horizontal_step_size
 end
 
 -- Window resizing
@@ -30,34 +35,34 @@ end
 -- pretty annoying, so the following implements a more consistent behavior by expanding the window in the
 -- direction of the specified arrow key.
 
--- expand_up expands the window upwards by one line.
+-- expand_up expands the window upwards by M.vertical_step_size.
 function M.expand_up()
 	local above_win_number = vim.fn.winnr("k")
 	if above_win_number == vim.fn.winnr() then
 		return
 	end
-	vim.fn.win_move_statusline(above_win_number, -1)
+	vim.fn.win_move_statusline(above_win_number, -M.vertical_step_size)
 end
 
--- expand_down expands the window downwards by one line.
+-- expand_down expands the window downwards by M.vertical_step_size.
 function M.expand_down()
 	local current_win_number = vim.fn.winnr()
-	vim.fn.win_move_statusline(current_win_number, 1)
+	vim.fn.win_move_statusline(current_win_number, M.vertical_step_size)
 end
 
--- expand_left expands the window to the left by one column.
+-- expand_left expands the window to the left by M.horizontal_step_size.
 function M.expand_left()
 	local left_win_number = vim.fn.winnr("h")
 	if left_win_number == vim.fn.winnr() then
 		return
 	end
-	vim.fn.win_move_separator(left_win_number, -1)
+	vim.fn.win_move_separator(left_win_number, -M.horizontal_step_size)
 end
 
--- expand_right expands the window to the right by one column.
+-- expand_right expands the window to the right by M.horizontal_step_size.
 function M.expand_right()
 	local current_win_number = vim.fn.winnr()
-	vim.fn.win_move_separator(current_win_number, 1)
+	vim.fn.win_move_separator(current_win_number, M.horizontal_step_size)
 end
 
 return M
