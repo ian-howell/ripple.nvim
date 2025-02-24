@@ -12,6 +12,13 @@ M.setup = function(opts)
 		},
 	}
 
+	M.vertical_step_size = opts.vertical_step_size or default.vertical_step_size
+	M.horizontal_step_size = opts.horizontal_step_size or default.horizontal_step_size
+
+	if opts and opts.disable_keymaps then
+		return
+	end
+
 	local keys = vim.tbl_deep_extend("force", default.keys, (opts and opts.keys) or {})
 	for func_name, args in pairs(keys) do
 		if keys[func_name] then
@@ -23,9 +30,6 @@ M.setup = function(opts)
 			vim.keymap.set(args.mode, args[1], M[func_name], { desc = args.desc })
 		end
 	end
-
-	M.vertical_step_size = opts.vertical_step_size or default.vertical_step_size
-	M.horizontal_step_size = opts.horizontal_step_size or default.horizontal_step_size
 end
 
 -- Window resizing

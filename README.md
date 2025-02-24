@@ -57,6 +57,16 @@ require('ripple').setup({
   --   expand_right = "<right>",
   --   expand_left = "<left>",
   -- },
+
+  -- -- Use the following to disable all key mappings:
+  -- disable_keymaps = true,
+  -- -- Or disable them one at a time:
+  -- keys = {
+  --   expand_up = false,
+  --   expand_down = false,
+  --   expand_right = false,
+  --   expand_left = false,
+  -- },
 })
 ```
 
